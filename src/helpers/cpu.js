@@ -20,18 +20,18 @@ export function cpuMove(board, point) {
   let cpu = {};
   if (rowWin.length > 2) {
     if (!pointsFirstRow.find(item => item.id === rowWin[0].id)) {
-      points = [...points, rowWin[0].id - 1];
+      points.push(rowWin[0].id - 1);
     }
     if (!pointsLastRow.find(item => item.id === rowWin[rowWin.length - 1].id)) {
-      points = [...points, rowWin[rowWin.length - 1].id + 1];
+      points.push(rowWin[rowWin.length - 1].id + 1);
     }
   }
   if (columnWin.length > 2) {
     if (columnWin[0].id - sizeColumn > 0) {
-      points = [...points, columnWin[0].id - sizeColumn];
+      points.push(columnWin[0].id - sizeColumn);
     }
     if (columnWin[0].id + sizeColumn < size) {
-      points = [...points, columnWin[columnWin.length - 1].id + sizeColumn];
+      points.push(columnWin[columnWin.length - 1].id + sizeColumn);
     }
   }
   if (leftDiagonalWin.length > 2) {
@@ -39,7 +39,7 @@ export function cpuMove(board, point) {
       leftDiagonalWin[0].id - sizeColumn > 0 &&
       !pointsFirstRow.find(item => item.id === leftDiagonalWin[0].id)
     ) {
-      points = [...points, leftDiagonalWin[0].id - sizeColumn - 1];
+      points.push(leftDiagonalWin[0].id - sizeColumn - 1);
     }
     if (
       leftDiagonalWin[leftDiagonalWin.length - 1].id + sizeColumn < size &&
@@ -47,10 +47,9 @@ export function cpuMove(board, point) {
         item => item.id === leftDiagonalWin[leftDiagonalWin.length - 1].id
       )
     ) {
-      points = [
-        ...points,
+      points.push(
         leftDiagonalWin[leftDiagonalWin.length - 1].id + sizeColumn + 1
-      ];
+      );
     }
   }
   if (rightDiagonalWin.length > 2) {
@@ -58,7 +57,7 @@ export function cpuMove(board, point) {
       rightDiagonalWin[0].id - sizeColumn > 0 &&
       !pointsLastRow.find(item => item.id === rightDiagonalWin[0].id)
     ) {
-      points = [...points, rightDiagonalWin[0].id - sizeColumn + 1];
+      points.push(rightDiagonalWin[0].id - sizeColumn + 1);
     }
     if (
       rightDiagonalWin[rightDiagonalWin.length - 1].id + sizeColumn < size &&
@@ -66,10 +65,9 @@ export function cpuMove(board, point) {
         item => item.id === rightDiagonalWin[rightDiagonalWin.length - 1].id
       )
     ) {
-      points = [
-        ...points,
+      points.push(
         rightDiagonalWin[rightDiagonalWin.length - 1].id + sizeColumn - 1
-      ];
+      );
     }
   }
   const c = board.filter(
@@ -77,11 +75,9 @@ export function cpuMove(board, point) {
   );
   if (c.length > 0) {
     if (c.length > 1) {
-      cpu = c[Math.floor((Math.random() - 0.00000000001) * points.length)];
-      console.log(cpu);
+      cpu = c[Math.floor((Math.random() - 0.00000000001) * c.length)];
     } else {
       cpu = c[0];
-      console.log(cpu);
     }
   } else {
     const top = point - sizeColumn > 0 ? point - sizeColumn : null;
@@ -131,8 +127,7 @@ export function cpuMove(board, point) {
     if (p.length < 1) {
       p = board.filter(item => item.check === "");
     }
-    cpu = p[Math.floor((Math.random() - 0.00000000001) * points.length)];
-    console.log(cpu);
+    cpu = p[Math.floor((Math.random() - 0.00000000001) * p.length)];
   }
   return cpu;
 }

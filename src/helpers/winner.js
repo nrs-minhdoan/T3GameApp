@@ -60,7 +60,7 @@ export function checkColumnWin(board, point) {
   let array_bottom = [];
   while (
     check_top !== null &&
-    check_top - sizeColumn > 0 &&
+    check_top - sizeColumn >= 0 &&
     top < 5 &&
     top + bottom < 5
   ) {
@@ -77,7 +77,7 @@ export function checkColumnWin(board, point) {
   }
   while (
     check_bottom !== null &&
-    check_bottom + sizeColumn < size - 1 &&
+    check_bottom + sizeColumn <= size - 1 &&
     bottom < 5 &&
     top + bottom < 5
   ) {
@@ -134,6 +134,7 @@ export function checkRightDiagonalWin(board, point) {
   }
   while (
     check_bottom !== null &&
+    check_bottom !== 0 &&
     check_bottom + sizeColumn < size - 1 &&
     bottom < 5 &&
     top + bottom < 5
@@ -197,8 +198,8 @@ export function checkLeftDiagonalWin(board, point) {
   while (
     check_bottom !== null &&
     check_bottom + sizeColumn < size - 1 &&
-    bottom < 5 &&
-    top + bottom < 5
+    bottom < 4 &&
+    top + bottom < 4
   ) {
     if (!!pointsLastRow.find(item => item === check_bottom)) {
       check_bottom = null;

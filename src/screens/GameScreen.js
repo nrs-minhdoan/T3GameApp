@@ -22,6 +22,8 @@ const arrayBoard = Array.apply(null, { length: 36 }).map((item, index) => ({
   check: ""
 }));
 
+const numColumns = Math.sqrt(arrayBoard.length);
+
 class GameScreen extends React.PureComponent {
   state = {
     board: arrayBoard,
@@ -166,7 +168,7 @@ class GameScreen extends React.PureComponent {
             </TouchableHighlight>
           )}
           keyExtractor={item => item.id}
-          numColumns={6}
+          numColumns={numColumns}
         />
         <View style={styles.wrapper}>
           <TouchableHighlight onPress={this.handleEventResetBoard}>
@@ -189,8 +191,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000"
   },
   item: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
